@@ -121,3 +121,5 @@ sync.sh
 product.json
 junit.xml
 *.snap
+*.java-version
+.idea/
