@@ -66,8 +66,6 @@ export const NEXT_PUBLIC_APP_NAME = "";
 export const DASHBOARD_API_URL = "https://internal1.dashboard.bff.insight.ai";
 export const TOPIC_API_URL = "https://internal1.topic.bff.insight.ai";
 export const AUTH_DOMAIN = "https://internal1.auth.bff.insight.ai";
-export const PLAUSIBLE_DOMAIN = "https://analytics.internal.insight.ai";
-
 export const ADMIN_AGENT_NAME = "knowledge_agent";
 
 export const CHAT_INIT_STATE = {

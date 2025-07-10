@@ -6,7 +6,6 @@
 const DASHBOARD_API_URL = process.env.DASHBOARD_API_URL || "";
 const TOPIC_API_URL = process.env.TOPIC_API_URL || "";
 const AUTH_DOMAIN = process.env.AUTH_DOMAIN || "";
-const PLAUSIBLE_DOMAIN = process.env.PLAUSIBLE_DOMAIN || "";
 const ADMIN_AGENT = process.env.ADMIN_AGENT || "";
 const ADMIN_FLOW_DASHBOARD_API = process.env.ADMIN_FLOW_DASHBOARD_API || "";
 /**
@@ -25,7 +24,6 @@ const nextConfig = {
         DASHBOARD_API_URL,
         TOPIC_API_URL,
         AUTH_DOMAIN,
-        PLAUSIBLE_DOMAIN,
         ADMIN_AGENT,
         ADMIN_FLOW_DASHBOARD_API
     },
@@ -48,14 +46,6 @@ const nextConfig = {
             {
                 source: "/documentation/:path*",
                 destination: "http://localhost:9001/documentation/:path*"
-            },
-            {
-                source: "/assets/analytics.js",
-                destination: `${PLAUSIBLE_DOMAIN}/js/plausible.local.manual.js`
-            },
-            {
-                source: "/api/event",
-                destination: `${PLAUSIBLE_DOMAIN}/api/event`
             },
             {
                 source: "/api/v1/dashboard/:path*",

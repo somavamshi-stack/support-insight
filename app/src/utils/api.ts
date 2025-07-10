@@ -1,8 +1,5 @@
-import { trackApiError, trackApiRequest, trackApiResponse } from "./analytics";
 import { getDeviceFingerprint } from "../utils/fingerprint";
 import axios from "axios";
-
-const ENABLE_ANALYTICS = false; // process.env.PLAUSIBLE_DOMAIN != undefined;
 
 const createApiService = (name: string, baseURL: string, withCredentials = true) => {
     const service = axios.create({
@@ -14,28 +11,10 @@ const createApiService = (name: string, baseURL: string, withCredentials = true)
         async (config) => {
             const deviceId = await getDeviceFingerprint();
             config.headers["device-id"] = deviceId;
-
-            if (ENABLE_ANALYTICS) {
-                trackApiRequest(name, config);
-            }
             return config;
         },
         (error) => Promise.reject(error)
     );
-
-    if (ENABLE_ANALYTICS) {
-        service.interceptors.response.use(
-            async (response) => {
-                trackApiResponse(name, response);
-                return response;
-            },
-            async (error) => {
-                trackApiError(name, error);
-                return Promise.reject(error);
-            }
-        );
-    }
-
     return service;
 };
 

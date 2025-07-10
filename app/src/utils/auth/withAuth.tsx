@@ -1,17 +1,19 @@
-import Session from "supertokens-auth-react/recipe/session";
-import { setCookie } from "cookies-next/client";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import isEmpty from "lodash/isEmpty";
+// import Session from "supertokens-auth-react/recipe/session";
+// import { setCookie } from "cookies-next/client";
+// import { useEffect, useState } from "react";
+// import { useRouter } from "next/router";
+// import isEmpty from "lodash/isEmpty";
 
-import { getUserId, validateAndRefreshSession } from "@utils";
+// import { getUserId, validateAndRefreshSession } from "@utils";
 import { useUserinfo } from "@hooks";
+import { getUserId } from "@utils";
 
 export function withAuth<P>(WrappedComponent: React.ComponentType<P>): React.FC<P> {
     return (props: P) => {
+        const user = useUserinfo();
+        /*
         const router = useRouter();
         const [isAuthenticated, setIsAuthenticated] = useState(false);
-        const user = useUserinfo();
 
         useEffect(() => {
             const { pathname } = router;
@@ -37,7 +39,7 @@ export function withAuth<P>(WrappedComponent: React.ComponentType<P>): React.FC<
         }, [router]);
 
         if (!isAuthenticated) return null;
-
+*/
         return <WrappedComponent {...props} userId={getUserId()} user={user} />;
     };
 }
