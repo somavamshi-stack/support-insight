@@ -1,0 +1,30 @@
+{
+  "recommendations": [
+    // Linting / Formatting
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+
+    // Testing
+    "orta.vscode-jest",
+
+    // Showing todo comments
+    "gruntfuggly.todo-tree",
+
+    // Collaborating
+    "ms-vsliveshare.vsliveshare",
+
+    // Debugging
+    "ms-vscode.vscode-js-profile-flame",
+
+    // MDX Authoring
+    //"unifiedjs.vscode-mdx",
+
+    // CSS Authoring (mainly Dev Overlay)
+    "styled-components.vscode-styled-components",
+
+    "DavidAnson.vscode-markdownlint",
+    "ms-vscode-remote.remote-containers",
+
+    "redhat.vscode-yaml"
+  ]
+}

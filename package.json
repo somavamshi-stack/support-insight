@@ -1,0 +1,48 @@
+{
+  "name": "support-insight",
+  "version": "1.0.0",
+  "description": "support-insight Web portal",
+  "scripts": {
+    "prepare": "husky",
+    "first-time": "npm run upgrade && pnpm run dev:install",
+    "start": "docker-compose up --remove-orphans",
+    "stop": "docker-compose down",
+    "build": "docker-compose build",
+    "build:docker": "docker build --pull --rm -f Dockerfile -t fig/app:latest .",
+    "dev": "npm run dev:install && npm run dev:upgrade && npm run dev:prettify",
+    "dev:prettify": "concurrently \"npm run dev:prettify:app\" \"npm run dev:prettify:docs\"",
+    "dev:prettify:app": "cd app && npm run prettify",
+    "dev:prettify:docs": "cd docs && npm run dev:prettify",
+    "dev:install": "pnpm i && concurrently \"npm run dev:install:app\" \"npm run dev:install:docs\"",
+    "dev:install:app": "cd app && pnpm i",
+    "dev:install:docs": "cd docs && pnpm i",
+    "dev:upgrade": "npm run upgrade && concurrently \"npm run dev:upgrade:app\" \"npm run dev:upgrade:docs\"",
+    "dev:upgrade:app": "cd app && npm run upgrade",
+    "dev:upgrade:docs": "cd docs && npm run dev:upgrade",
+    "upgrade": "npm i -g -f npm-check-updates yarn serve npm pnpm && pnpm self-update && ncu -u -p pnpm && pnpm install --silent",
+    "start:dev": "cd app && pnpm run start:dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/somavamshi-stack/support-insight.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/somavamshi-stack/support-insight/issues"
+  },
+  "homepage": "https://github.com/somavamshi-stack/support-insight#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.0",
+    "husky": "^9.1.7",
+    "jest-junit": "^16.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "echo \"[Husky] pre-commit\""
+    }
+  },
+  "dependencies": {
+    "support-insight-portal": "file:"
+  }
+}

@@ -1,0 +1,63 @@
+FROM node:20-alpine
+
+ENV FORCE_COLOR=0
+
+# Enable corepack (this provides pnpm)
+RUN corepack enable
+
+# Update apk and install dependencies in a single layer
+RUN apk update && apk upgrade && rm -rf /var/cache/apk/*
+
+# Only update npm, pnpm is already available via corepack
+RUN npm i -g npm@latest
+
+# Create user and group with specific IDs
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S insight -u 1001 -G nodejs
+
+# Set working directory
+WORKDIR /app/studio
+
+# Copy package files first for better layer caching
+COPY app/package.json app/pnpm-lock.yaml ./
+
+# Install all dependencies (including dev dependencies for development)
+# Use --no-frozen-lockfile in development to handle lockfile mismatches
+RUN pnpm install --no-frozen-lockfile
+
+# Install additional dev dependencies if needed
+RUN pnpm add -D @parcel/watcher @tailwindcss/oxide lightningcss sharp
+
+# Disable Next.js telemetry
+RUN npx next telemetry disable
+
+# Build arguments for Next.js config
+ARG DASHBOARD_API_URL
+ARG TOPIC_API_URL
+ARG AUTH_DOMAIN
+ARG PLAUSIBLE_DOMAIN
+ARG ADMIN_AGENT
+ARG ADMIN_FLOW_DASHBOARD_API
+
+# Set environment variables
+ENV NODE_ENV=development
+ENV PORT=8080
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV DASHBOARD_API_URL=$DASHBOARD_API_URL
+ENV TOPIC_API_URL=$TOPIC_API_URL
+ENV AUTH_DOMAIN=$AUTH_DOMAIN
+ENV PLAUSIBLE_DOMAIN=$PLAUSIBLE_DOMAIN
+ENV ADMIN_AGENT=$ADMIN_AGENT
+ENV ADMIN_FLOW_DASHBOARD_API=$ADMIN_FLOW_DASHBOARD_API
+
+# Change ownership of the working directory
+RUN chown -R insight:nodejs /app/studio
+
+# Switch to non-root user
+USER insight
+
+# Expose port
+EXPOSE 8080
+
+# Start the development server
+CMD ["pnpm", "dev"]

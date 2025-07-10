@@ -1,0 +1,15 @@
+.results
+scripts/
+.git
+.gitignore
+app/node_modules
+app/.next
+app/out
+app/coverage
+docs/node_modules
+docs/.docusaurus
+package-lock.json
+node_modules
+dist
+build
+.env.local

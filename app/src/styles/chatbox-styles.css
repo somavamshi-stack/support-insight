@@ -1,0 +1,51 @@
+.copilot-chat-container .copilot-kit-chat,
+.copilot-chat-container .copilot-kit-chat *,
+.copilot-chat-container .copilot-kit-message,
+.copilot-chat-container .copilot-kit-message *,
+.copilot-chat-container .copilot-kit-input,
+.copilot-chat-container .copilot-kit-input *,
+.copilot-chat-container .copilot-kit-button,
+.copilot-chat-container .copilot-kit-button *,
+.copilot-chat-container input,
+.copilot-chat-container textarea,
+.copilot-chat-container button,
+.copilot-chat-container p,
+.copilot-chat-container div {
+    font-family: var(--barlow-font-family), sans-serif !important;
+    font-size: 0.8rem !important;
+    line-height: 1.6 !important;
+    letter-spacing: 0.01em !important;
+    color: #000;
+}
+ 
+.copilot-chat-container .copilot-kit-chat-message {
+    margin-bottom: 1.2em !important;
+}
+ 
+.copilot-chat-container .copilot-kit-chat-input input,
+.copilot-chat-container .copilot-kit-chat-input textarea {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    padding: 0.75em 1em !important;
+}
+ 
+.copilotKitCodeBlockToolbar{
+    color: #000 !important;
+    background: white !important;
+    border: 1px solid #e4e4e4;
+}
+
+
+
+.language-sql .copilot-chat-container span {
+    color: white !important;
+}
+ 
+.copilotKitUserMessage{
+    background: #E4E4E4 !important;
+    color: #000 !important ;
+}
+ 
+.language-sql .copilot-chat-container span{
+    color: white !important;
+}

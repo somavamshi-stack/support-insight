@@ -1,0 +1,38 @@
+
+services:
+  fig-web-app:
+    container_name: fig-studio
+    build:
+      context: .
+      dockerfile: Dockerfile.dev  
+      args:
+        DASHBOARD_API_URL: ${DASHBOARD_API_URL}
+        TOPIC_API_URL: ${TOPIC_API_URL}
+        AUTH_DOMAIN: ${AUTH_DOMAIN}
+        PLAUSIBLE_DOMAIN: ${PLAUSIBLE_DOMAIN}
+        ADMIN_AGENT: ${ADMIN_AGENT}
+        ADMIN_FLOW_DASHBOARD_API: ${ADMIN_FLOW_DASHBOARD_API}
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=development
+      - DASHBOARD_API_URL=${DASHBOARD_API_URL}
+      - TOPIC_API_URL=${TOPIC_API_URL}
+      - AUTH_DOMAIN=${AUTH_DOMAIN}
+      - PLAUSIBLE_DOMAIN=${PLAUSIBLE_DOMAIN}
+      - ADMIN_AGENT=${ADMIN_AGENT}
+      - ADMIN_FLOW_DASHBOARD_API=${ADMIN_FLOW_DASHBOARD_API}
+    volumes:
+      - ./app:/app/studio
+      - /app/studio/node_modules  
+    networks:
+      fig-network:
+        ipv4_address: 10.4.0.2
+
+networks:
+  fig-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.4.0.0/16
+          gateway: 10.4.0.1
